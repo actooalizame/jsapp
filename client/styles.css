@@ -3,3 +3,7 @@
 	left: initial;
 	right: 1px;
 }
+
+.sidebar {
+	min-height: 246px;
+}

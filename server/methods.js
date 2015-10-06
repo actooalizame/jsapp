@@ -31,5 +31,21 @@ Meteor.methods({
 		assignedTo: userId,
 		status: "initial"
 		});
-  }
+  },
+  'setCurrent': function(contactId){
+		Contacts.update(
+			{ _id: contactId },
+			{$set: {
+				status:"current",
+			}}
+		);
+  },
+  'setUnanswered': function(contactId){
+		Contacts.update(
+			{ _id: contactId },
+			{$set: {
+				status:"unanswered",
+			}}
+		);
+  },
 });

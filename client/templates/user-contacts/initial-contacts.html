@@ -1,9 +1,82 @@
-<template name="userContacts">
-	{{#if currentUser}}
-	{{#each contacts}}
-		{{name}}
-	{{/each}}
-	{{else}}
-		<h3>logueate para participar</h3>
-	{{/if}}
+<template name="initialContacts">
+	<div class="container">
+  {{#if currentUser}}
+  <div class="row">
+    <div class="col-sm-3 sidebar">
+      <h4>On call</h4>
+      {{#each currentContacts}}
+      {{name}}
+      {{/each}}
+      <hr>
+      <h4>No contestan</h4>
+      {{#each unAnswered}}
+      <ul>
+      	<li>{{name}}</li>
+      </ul>
+      	
+      {{/each}}
+    </div>
+    
+    <div class="col-sm-6">
+    	{{#each initialContacts}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>{{name}}</h4>
+        </div>
+        <div class="panel-body">
+          <h4>Telefono: {{phone}}</h4>
+          <h4>Email: {{email}}</h4>
+          <hr>
+          <button type="button" class="btn btn-primary call-contact" data-toggle="modal" data-target="#myModal">
+          Llamar
+          </button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog" role="document">
+        {{#with contact}}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Llamando a: <strong>{{name}}</strong></h4>
+          </div>
+          <div class="modal-footer">
+            <h5>{{_id}}</h5>
+            <button type="button" class="btn btn-default no-responde" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+        {{/with}}
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog" role="document">
+        {{#with suggestedContact}}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Llamando a: <strong>{{name}}</strong></h4>
+          </div>
+          <div class="modal-footer">
+            <h5>{{_id}}</h5>
+            <button type="button" class="btn btn-default no-responde2" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+        {{/with}}
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <h3>logueate para participar</h3>
+  {{/if}}
+  </div>
 </template>

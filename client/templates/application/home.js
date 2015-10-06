@@ -1,6 +1,6 @@
 Template.home.rendered = function(){
 
-	var users = Meteor.users.find({active:false});
+	/*var users = Meteor.users.find({active:false});
   
 	var handle = users.observeChanges({
     added: function(id, user) {
@@ -42,8 +42,8 @@ Template.home.rendered = function(){
       };
       interval = Meteor.setInterval(timeLeft, 1000);
     }
-  });
-
+  });*/
+  //$('#myModal').modal();
 };
 
 
