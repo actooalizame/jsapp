@@ -1,0 +1,9 @@
+<template name="userContacts">
+	{{#if currentUser}}
+	{{#each contacts}}
+		{{name}}
+	{{/each}}
+	{{else}}
+		<h3>logueate para participar</h3>
+	{{/if}}
+</template>
