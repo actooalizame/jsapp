@@ -1,29 +1,5 @@
 Meteor.methods({
-	'setActive': function(userId){
-    Meteor.users.update(
-			{ _id: userId },
-			{$set: {
-				active:true,
-			}}
-		);
-  },
-  'setInactive': function(userId){
-    Meteor.users.update(
-			{ _id: userId },
-			{$set: {
-				active:false,
-			}}
-		);
-  },
-  'setSuggested': function(contactId){
-		Contacts.update(
-			{ _id: contactId },
-			{$set: {
-				status:"suggested",
-			}}
-		);
-  },
-  'insertContact': function(name,phone,email,userId){
+	'insertContact': function(name,phone,email,userId){
 		Contacts.insert({
 		name: name,
 		phone: phone,
@@ -48,4 +24,46 @@ Meteor.methods({
 			}}
 		);
   },
+  'setOnCall': function(contactId){
+		Contacts.update(
+			{ _id: contactId },
+			{$set: {
+				status:"onCall",
+			}}
+		);
+  },
+  'setCallLater': function(contactId){
+		Contacts.update(
+			{ _id: contactId },
+			{$set: {
+				status:"callLater",
+			}}
+		);
+  },
+  'createReminder': function(contactId,hours,minutes){
+		Reminders.insert({
+			contactId: contactId,
+			hours: hours,
+			minutes: minutes,
+			userId: this.userId,
+			changed: new Date()
+		});
+  },
+'	setActive': function(userId){
+    Meteor.users.update(
+			{ _id: userId },
+			{$set: {
+				active:true,
+			}}
+		);
+  },
+  'setInactive': function(userId){
+    Meteor.users.update(
+			{ _id: userId },
+			{$set: {
+				active:false,
+			}}
+		);
+  },
+
 });

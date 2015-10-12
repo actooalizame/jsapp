@@ -1,0 +1,48 @@
+<template name="contactDetails">
+  <div class="container">
+    {{name}}
+    {{#if hasReminder}}
+    {{#with reminder}}
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>Llamar en {{hours}}:{{minutes}} hs.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/with}}
+    {{else}}
+    <h4>Llamar mas tarde</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form class="call-later">
+              <div class="form-group">
+                <div class="col-sm-6">
+                  <input type="number" min="0" max="6" class="form-control" name="hours" id="hours" value="0" placeholder="Horas">
+                </div>
+                <div class="col-sm-6">
+                  <input type="number" min="0" step="15" max="59" class="form-control" name="minutes" id="minutes" placeholder="Minutos">
+                </div>
+              </div>
+              <div class="col-sm-4 col-sm-offset-4">     
+                <button type="submit" class="btn btn-success">Cambiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-sm-4 col-sm-offset-2">     
+              <button type="button" class="btn btn-warning btn-lg call-tomorrow">Llamar Manana</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</template>

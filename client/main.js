@@ -1,8 +1,15 @@
 Meteor.startup(function() {
+  //Session.clear('waitTime');
+  //Session.setDefault('active',false);
   Tracker.autorun(function() {
     Meteor.subscribe('userData');
     
     });
+});
+
+UI.registerHelper('formatTime', function(context, options) {
+  if(context)
+    return moment(context).format('hh:mm');
 });
 
 toastr.options = {

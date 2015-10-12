@@ -3,7 +3,7 @@
   {{#if currentUser}}
   <div class="row">
     <div class="col-sm-3 sidebar">
-      <h4>On call</h4>
+      <h4>Llamando:</h4>
       {{#each currentContacts}}
       {{name}}
       {{/each}}
@@ -14,6 +14,19 @@
       	<li>{{name}}</li>
       </ul>
       	
+      {{/each}}
+      <hr>
+      <h4>Llamar mas tarde:</h4>
+      {{#each callLater}}
+      <ul>
+        <li>
+          <h5>{{name}}</h5>
+          {{#each reminders}}
+          <p>En {{hours}}:{{minutes}} hs a las {{formatTime changed}}</p>
+          {{/each}}
+        </li>
+      </ul>
+        
       {{/each}}
     </div>
     
@@ -47,8 +60,8 @@
           </div>
           <div class="modal-footer">
             <h5>{{_id}}</h5>
-            <button type="button" class="btn btn-default no-responde" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-danger no-responde" data-dismiss="modal">No Contesta</button>
+            <a href="/cliente/{{_id}}" class="btn btn-success responde">Contesta</a>
           </div>
         </div>
         {{/with}}
@@ -67,8 +80,8 @@
           </div>
           <div class="modal-footer">
             <h5>{{_id}}</h5>
-            <button type="button" class="btn btn-default no-responde2" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-danger no-responde2" data-dismiss="modal">No Contesta</button>
+            <a href="/cliente/{{_id}}" class="btn btn-success responde2">Contesta</a>
           </div>
         </div>
         {{/with}}

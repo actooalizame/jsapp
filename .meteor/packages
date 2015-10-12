@@ -24,3 +24,5 @@ iron:router
 ejson
 accounts-password
 chrismbeckett:toastr
+reactive-var
+momentjs:moment

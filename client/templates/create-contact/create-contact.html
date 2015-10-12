@@ -1,0 +1,26 @@
+<template name="createContact">
+	<form class="add-contact">
+	  <div class="form-group">
+	  	<div class="col-sm-6">
+	  		<label for="name">Nombre</label>
+	    	<input type="text" class="form-control" name="firstName" id="name" placeholder="Nombre">
+	  	</div>
+	  	<div class="col-sm-6">
+	  		<label for="tel">Tel</label>
+	    	<input type="text" class="form-control" name="tel" id="tel" placeholder="telefono">
+	  	</div>
+	  </div>
+	  <div class="form-group col-sm-6">
+	  	<label for="assigned">Asignado a:</label>
+	    	<input type="text" class="form-control" name="assigned" id="assigned" placeholder="Asignado a">
+		</div>
+		<div class="form-group col-sm-6">
+	  	<label for="email">email</label>
+    	<input type="email" class="form-control" name="email" id="email" placeholder="email">
+		</div>
+  	
+  	<div class="col-md-12">		  
+  		<button type="submit" class="btn btn-success add-contact">Crear</button>
+  	</div>	
+	</form>
+</template>
