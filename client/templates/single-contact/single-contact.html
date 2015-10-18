@@ -1,9 +1,10 @@
 <template name="contactDetails">
-  <div class="container">
-    {{name}}
-    {{#if hasReminder}}
-    {{#with reminder}}
+  {{name}}
+  <section class="container">
     <div class="row">
+    {{#if hasReminder}}
+      {{#with reminder}}
+    
       <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -11,11 +12,10 @@
           </div>
         </div>
       </div>
-    </div>
-    {{/with}}
+      {{/with}}
     {{else}}
-    <h4>Llamar mas tarde</h4>
-    <div class="row">
+      <h4>Llamar mas tarde</h4>
+      
       <div class="col-sm-4">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -42,7 +42,63 @@
           </div>
         </div>
       </div>
-    </div>
+      
+
     {{/if}}
-  </div>
+
+    {{#if hasOrders}} 
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {{#with newOrder}}
+              <p>Agrega productos al pedido #{{_id}}</p>
+              {{#each orderProducts}}
+                {{name}}
+              {{/each}}
+              <form class="insert-product">
+                <div class="form-group">
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" name="product" id="product" placeholder="Producto">
+                  </div>
+                  <div class="col-sm-6">     
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                  </div>
+                </div>
+              </form>
+              <br>
+              <button type="button" class="btn btn-success finish-order {{invisibleClass}}">Finalizar Pedido</button>
+            {{/with}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+    
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <button type="button" class="btn btn-success btn-lg create-order">Crear Pedido</button>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="list-group">
+            {{#each finishedOrders}}
+              <li class="list-group-item">
+                {{formatCompleteTime createdAt}}
+                {{#each orderProducts}}
+                  <p>{{name}}</p>
+                {{/each}}
+              </li>
+            {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    {{/if}}
+    
+
+    
+    </div>
+  </section>
 </template>

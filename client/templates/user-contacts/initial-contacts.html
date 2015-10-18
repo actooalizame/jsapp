@@ -3,16 +3,12 @@
   {{#if currentUser}}
   <div class="row">
     <div class="col-sm-3 sidebar">
-      <h4>Llamando:</h4>
-      {{#each currentContacts}}
-      {{name}}
-      {{/each}}
-      <hr>
+      
       <h4>No contestan</h4>
       {{#each unAnswered}}
       <ul>
       	<li>
-          <h5>{{name}} <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+          <h5><a href="/cliente/{{_id}}">{{name}}</a> <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
         </li>
       </ul>
       	
@@ -22,13 +18,18 @@
       {{#each callLater}}
       <ul>
         <li>
-          <h5>{{name}} <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+          <h5><a href="/cliente/{{_id}}">{{name}}</a> <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
           {{#each reminders}}
           <p>En {{hours}}:{{minutes}} hs a las {{formatTime changed}}</p>
           {{/each}}
         </li>
       </ul>
         
+      {{/each}}
+      <hr>
+      <h4>Llamando:</h4>
+      {{#each currentContacts}}
+      {{name}}
       {{/each}}
     </div>
     
@@ -88,6 +89,14 @@
         </div>
         {{/with}}
       </div>
+    </div>
+
+    <div class="col-sm-3">
+      {{#each hasOrders}}
+      <ul>
+        <h5><a href="/cliente/{{_id}}">{{name}}</a> <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+      </ul>
+      {{/each}}
     </div>
   </div>
   {{else}}

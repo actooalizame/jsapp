@@ -13,6 +13,7 @@ Meteor.methods({
 			{ _id: contactId },
 			{$set: {
 				status:"current",
+				changed: new Date()
 			}}
 		);
   },
@@ -21,6 +22,7 @@ Meteor.methods({
 			{ _id: contactId },
 			{$set: {
 				status:"unanswered",
+				changed: new Date()
 			}}
 		);
   },
@@ -29,6 +31,7 @@ Meteor.methods({
 			{ _id: contactId },
 			{$set: {
 				status:"onCall",
+				changed: new Date()
 			}}
 		);
   },
@@ -37,6 +40,17 @@ Meteor.methods({
 			{ _id: contactId },
 			{$set: {
 				status:"callLater",
+				changed: new Date()
+			}}
+		);
+  },
+  'setOrdered': function(contactId){
+		Contacts.update(
+			{ _id: contactId },
+			{$set: {
+				status:"ordered",
+				ordered: true,
+				changed: new Date()
 			}}
 		);
   },
@@ -54,7 +68,29 @@ Meteor.methods({
 		_id: reminderId
 		});
   },
-'	setActive': function(userId){
+  'createOrder': function(contactId){
+		Orders.insert({
+			contactId: contactId,
+			status: "unfinished",
+			createdAt: new Date()
+		});
+  },
+  'insertProduct': function(orderId,contactId,name){
+		Products.insert({
+			orderId: orderId,
+			contactId: contactId,
+			name: name
+		});
+  },
+  'finishOrder': function(orderId){
+		Orders.update(
+			{ _id: orderId },
+			{$set: {
+				status:"finished",
+			}}
+		);
+  },
+  'setActive': function(userId){
     Meteor.users.update(
 			{ _id: userId },
 			{$set: {

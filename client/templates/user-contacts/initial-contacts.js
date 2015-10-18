@@ -6,10 +6,13 @@ Template.initialContacts.helpers({
 		return Contacts.find({status:"current"},{sort:{name:1}});
 	},
 	'unAnswered': function(){
-		return Contacts.find({status:"unanswered"},{sort:{name:1}});
+		return Contacts.find({status:"unanswered"},{sort:{changed:1}});
 	},
 	'callLater': function(){
-		return Contacts.find({status:"callLater"});
+		return Contacts.find({status:"callLater"},{sort:{changed:1}});
+	},
+	'hasOrders': function(){
+		return Contacts.find({ordered:true},{sort:{changed:1}});
 	},
 	'contact': function(){
 		var contactId = Session.get('selectedContact');
@@ -34,7 +37,6 @@ Template.initialContacts.events({
 			Meteor.call('setCurrent',contactId);
 			//Session.set('active', true);
 		});*/
-		console.log(contactId);
 	},
 	'click .responde': function(){
 		$('.modal-backdrop').remove();
@@ -76,7 +78,6 @@ Template.initialContacts.events({
 		Meteor.call('setCurrent',contactId);
 		Session.set('selectedContact',contactId);
 		$('#myModal').on('shown.bs.modal', function (e) {
-			
 			if(reminder!==undefined){
 				Meteor.call('deleteReminder', reminderId);
 			}

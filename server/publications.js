@@ -4,6 +4,12 @@ Meteor.publish('initialContacts', function() {
 	return Contacts.find({status:"initial",assignedTo:userId});
 });
 
+Meteor.publish('orderedContacts', function() {
+	var user = Meteor.users.findOne({_id:this.userId}),
+			userId = user._id;
+	return Contacts.find({status:"ordered",assignedTo:userId});
+});
+
 Meteor.publish('currentContacts', function() {
 	var user = Meteor.users.findOne({_id:this.userId}),
 			userId = user._id;
@@ -26,6 +32,18 @@ Meteor.publish('userReminders', function() {
 	var user = Meteor.users.findOne({_id:this.userId}),
 			userId = user._id;
 	return Reminders.find({userId:userId});
+});
+
+Meteor.publish('contactOrders', function(contactId){
+	return Orders.find({contactId:contactId});
+});
+
+Meteor.publish('contactProducts', function(contactId){
+	return Products.find({contactId:contactId});
+});
+
+Meteor.publish('orderProducts', function(orderId){
+	return Products.find({orderId:orderId});
 });
 
 Meteor.publish('userData', function() {

@@ -12,6 +12,12 @@ UI.registerHelper('formatTime', function(context, options) {
     return moment(context).format('hh:mm');
 });
 
+UI.registerHelper('formatCompleteTime', function(context, options) {
+  if(context)
+    return moment(context).format('DD-MM hh:mm');
+});
+
+
 toastr.options = {
   "closeButton": false,
   "debug": false,
