@@ -49,6 +49,11 @@ Meteor.methods({
 			changed: new Date()
 		});
   },
+  'deleteReminder': function(reminderId){
+		Reminders.remove({
+		_id: reminderId
+		});
+  },
 '	setActive': function(userId){
     Meteor.users.update(
 			{ _id: userId },

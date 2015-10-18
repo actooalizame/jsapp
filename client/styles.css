@@ -11,3 +11,7 @@
 .call-later button {
 	margin-top: 1em;
 }
+
+.label-success:hover {
+	cursor: pointer;
+}

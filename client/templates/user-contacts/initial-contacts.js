@@ -29,19 +29,19 @@ Template.initialContacts.events({
 		
 		var contactId = this._id;
 		Session.set('selectedContact',contactId);
-		
-		$('#myModal').on('shown.bs.modal', function (e) {
+		Meteor.call('setCurrent',contactId);
+		/*$('#myModal').on('shown.bs.modal', function (e) {
 			Meteor.call('setCurrent',contactId);
 			//Session.set('active', true);
-		});
-		
+		});*/
+		console.log(contactId);
 	},
 	'click .responde': function(){
 		$('.modal-backdrop').remove();
 		$('body').removeClass('modal-open');
 		var contactId = this._id;
 		Meteor.call('setOnCall',contactId);
-		
+		Session.clear('selectedContact');
 	},
 	'click .responde2': function(){
 		$('.modal-backdrop').remove();
@@ -49,12 +49,13 @@ Template.initialContacts.events({
 		var contactId = this._id;
 		Meteor.call('setOnCall',contactId);
 		toastr["warning"]("No dejes pasar tanto tiempo entre llamadas.", "Atencion!");
+		Session.clear('selectedContact');
 	},
 	'click .no-responde': function(){
 		var contactId = this._id;
 		$('#myModal').on('hidden.bs.modal', function (e) {
 			Meteor.call('setUnanswered',contactId);
-			//Session.set('active', false);
+			Session.clear('selectedContact');
 		});
 		
 	},
@@ -63,9 +64,23 @@ Template.initialContacts.events({
 		$('#myModal2').on('hidden.bs.modal', function (e) {
 			Meteor.call('setUnanswered',contactId);
 			toastr["warning"]("No dejes pasar tanto tiempo entre llamadas.", "Atencion!");
-			//Session.set('active', false);
+			Session.clear('selectedContact');
 		});
-		
+	},
+	'click .label-success': function(){
+		var contactId = this._id,
+				reminder = Reminders.findOne({contactId:contactId});
+		if(reminder!==undefined){
+			reminderId = reminder._id;
+		}
+		Meteor.call('setCurrent',contactId);
+		Session.set('selectedContact',contactId);
+		$('#myModal').on('shown.bs.modal', function (e) {
+			
+			if(reminder!==undefined){
+				Meteor.call('deleteReminder', reminderId);
+			}
+		});
 	}
 });
 

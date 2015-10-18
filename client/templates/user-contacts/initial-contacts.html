@@ -11,7 +11,9 @@
       <h4>No contestan</h4>
       {{#each unAnswered}}
       <ul>
-      	<li>{{name}}</li>
+      	<li>
+          <h5>{{name}} <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+        </li>
       </ul>
       	
       {{/each}}
@@ -20,7 +22,7 @@
       {{#each callLater}}
       <ul>
         <li>
-          <h5>{{name}}</h5>
+          <h5>{{name}} <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
           {{#each reminders}}
           <p>En {{hours}}:{{minutes}} hs a las {{formatTime changed}}</p>
           {{/each}}
