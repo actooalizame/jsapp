@@ -3,7 +3,8 @@
   {{#if currentUser}}
   <div class="row">
     <div class="col-sm-3 sidebar">
-      
+      <h2>Pendientes</h2>
+      <hr>
       <h4>No contestan</h4>
       {{#each unAnswered}}
       <ul>
@@ -34,6 +35,8 @@
     </div>
     
     <div class="col-sm-6">
+      <h2>Lista de Contactos</h2>
+      <hr>
     	{{#each initialContacts}}
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -92,9 +95,16 @@
     </div>
 
     <div class="col-sm-3">
+      <h2>Tienen Pedidos</h2>
+      <hr>
       {{#each hasOrders}}
       <ul>
-        <h5><a href="/cliente/{{_id}}">{{name}}</a> <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+        <li>
+          <h5><a href="/cliente/{{_id}}">{{name}}</a> <span class="label label-success" data-toggle="modal" data-target="#myModal">Llamar</span></h5>
+          <p>
+            <span class="label label-info view-status">Status</span> {{orderStatus}}
+          </p>
+        </li>
       </ul>
       {{/each}}
     </div>

@@ -15,3 +15,7 @@
 .label-success:hover {
 	cursor: pointer;
 }
+
+.text-centered{
+	text-align: center;
+}

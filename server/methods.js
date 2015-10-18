@@ -71,7 +71,7 @@ Meteor.methods({
   'createOrder': function(contactId){
 		Orders.insert({
 			contactId: contactId,
-			status: "unfinished",
+			state: "unfinished",
 			createdAt: new Date()
 		});
   },
@@ -86,7 +86,24 @@ Meteor.methods({
 		Orders.update(
 			{ _id: orderId },
 			{$set: {
-				status:"finished",
+				state:"finished",
+				status:"Sin confirmar"
+			}}
+		);
+  },
+  'confirmOrder': function(orderId){
+		Orders.update(
+			{ _id: orderId },
+			{$set: {
+				status:"Confirmado"
+			}}
+		);
+  },
+  'cancelOrder': function(orderId){
+		Orders.update(
+			{ _id: orderId },
+			{$set: {
+				status:"Cancelado"
 			}}
 		);
   },

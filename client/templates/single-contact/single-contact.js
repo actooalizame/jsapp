@@ -12,14 +12,14 @@ Template.contactDetails.helpers({
 	},
 	'hasOrders': function(){
 		var contactId = this._id,
-				ordersCount = Orders.find({contactId:contactId,status:"unfinished"}).count();
+				ordersCount = Orders.find({contactId:contactId,state:"unfinished"}).count();
 		if(ordersCount>0){
 			return true;
 		}
 	},
 	'newOrder': function(){
 		var contactId = this._id;
-		return Orders.findOne({contactId:contactId, status:"unfinished"});
+		return Orders.findOne({contactId:contactId, state:"unfinished"});
 	},
 	'orderProducts': function(){
 		var orderId =  this._id;
@@ -34,7 +34,7 @@ Template.contactDetails.helpers({
 	},
 	'finishedOrders': function(){
 		var contactId = this._id;
-		return Orders.find({contactId:contactId,status:"finished"},{sort:{createdAt:-1}});
+		return Orders.find({contactId:contactId,state:"finished"},{sort:{createdAt:-1}});
 	}
 });
 
@@ -67,5 +67,13 @@ Template.contactDetails.events({
 				contactId = order.contactId;
 		Meteor.call('finishOrder', orderId);
 		Meteor.call('setOrdered', contactId);
+	},
+	'click .confirm-order': function(){
+		var orderId = this._id;
+		Meteor.call('confirmOrder', orderId);
+	},
+	'click .cancel-order': function(){
+		var orderId = this._id;
+		Meteor.call('cancelOrder', orderId);
 	}
 });

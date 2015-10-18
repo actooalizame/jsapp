@@ -23,6 +23,15 @@ Template.initialContacts.helpers({
 	},
 	'reminders': function(){
 		return Reminders.find({contactId:this._id},{sort:{changed:-1}});
+	},
+	'orderStatus': function(){
+		var contactId = this._id,
+				session = Session.get('viewOrderId'),
+				order = Orders.findOne({contactId:contactId},{sort:{createdAt:-1}});
+		if(order!==undefined){
+			orderStatus = order.status;
+			return orderStatus;
+		}
 	}
 
 });
@@ -82,6 +91,10 @@ Template.initialContacts.events({
 				Meteor.call('deleteReminder', reminderId);
 			}
 		});
+	},
+	'click .view-status': function(){
+		var contactId = this._id;
+		Session.set('viewOrderId',contactId);
 	}
 });
 
