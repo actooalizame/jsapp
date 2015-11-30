@@ -68,9 +68,10 @@ Meteor.methods({
 		_id: reminderId
 		});
   },
-  'createOrder': function(contactId){
+  'createOrder': function(contactId,contactName){
 		Orders.insert({
 			contactId: contactId,
+			contactName: contactName,
 			state: "unfinished",
 			createdAt: new Date()
 		});

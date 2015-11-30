@@ -58,8 +58,10 @@ Template.contactDetails.events({
 		e.target.product.value = "";
 	},
 	'click .create-order': function(){
-		var contactId = this._id;
-		Meteor.call('createOrder',contactId);
+		var contactId = this._id,
+				contact = Contacts.findOne({_id:contactId}),
+				contactName = contact.name;
+		Meteor.call('createOrder',contactId,contactName);
 	},
 	'click .finish-order': function(){
 		var orderId = this._id,

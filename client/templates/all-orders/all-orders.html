@@ -1,0 +1,31 @@
+<template name="allOrders">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="center-block">
+					{{#each orders}}
+						<ul>
+							<li>
+								<h5>Fecha: {{formatCompleteTime createdAt}}</h5>
+								<h5>Cliente: <strong>{{contactName}}</strong></h5>
+								<h5>Status: <strong>{{status}}</strong></h5>
+								{{#each orderProducts}}
+								<ul>
+									<li>
+										{{name}}
+									</li>
+								</ul>
+								{{/each}}
+							</li>
+							<br>
+							<button type="button" class="btn btn-success btn-xs confirm-order">Confirmar Pedido</button>
+							<button type="button" class="btn btn-danger btn-xs cancel-order">Anular Pedido</button>
+						</ul>
+						<hr>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</template>

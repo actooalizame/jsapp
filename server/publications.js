@@ -1,3 +1,11 @@
+Meteor.publish('allProducts', function() {
+	return Products.find({});
+});
+
+Meteor.publish('allOrders', function() {
+	return Orders.find({state:"finished"});
+});
+
 Meteor.publish('initialContacts', function() {
 	var user = Meteor.users.findOne({_id:this.userId}),
 			userId = user._id;
